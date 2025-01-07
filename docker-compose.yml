@@ -1,0 +1,11 @@
+version: "3.9"
+
+services:
+  elsa_bot:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile
+    container_name: elsa_bot
+    volumes:
+      - .:/app
+    restart: on-failure
