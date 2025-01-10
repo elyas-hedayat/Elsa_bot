@@ -21,6 +21,7 @@ class Config:
 
     # API Endpoints
     METIS_BASE_URL = os.getenv('METIS_BASE_URL', 'https://api.metisai.ir/api/v1')
+    METIS_BASE_SESSION_URL = os.getenv("METIS_BASE_SESSION_URL", 'https://api.metisai.ir/api/v1/chat/session')
 
     @classmethod
     def get_chat_message_url(cls, session_id):
