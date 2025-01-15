@@ -3,7 +3,18 @@ from telebot import types
 from utils.enum import ExtraButton, MenuButtons
 
 
-def create_home_keyboard():
+
+def audio_keyboard():
+    keyboard = [
+        [
+            types.InlineKeyboardButton("Audio", callback_data="Audio"),
+        ],
+    ]
+    reply_markup = types.InlineKeyboardMarkup(keyboard)
+    return reply_markup
+
+
+def home_keyboard():
     markup = types.ReplyKeyboardMarkup(resize_keyboard=True, one_time_keyboard=True)
     home_button = types.KeyboardButton(MenuButtons.HOME)  # Home Button
     markup.add(home_button)
