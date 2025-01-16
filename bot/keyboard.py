@@ -3,6 +3,7 @@ from telebot import types
 from utils.enum import ExtraButton, MenuButtons
 
 
+
 def audio_keyboard():
     keyboard = [
         [
