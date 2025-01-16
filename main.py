@@ -54,7 +54,7 @@ def handle_legal_support_selection(message):
     elif message.text == MenuButtons.CASH_BALANCE:
         response_text = MessageEnum.CASH_BALANCE.format(message.from_user.first_name)
     elif message.text == MenuButtons.INCREASE_CREDIT:
-        response_text = MenuButtons.INCREASE_CREDIT
+        response_text = MessageEnum.INCREASE_CREDIT
     elif message.text == MenuButtons.SUPPORT:
         response_text = MessageEnum.SUPPORT.format(message.from_user.first_name)
     elif message.text == MenuButtons.LANGUAGE:
@@ -81,11 +81,12 @@ def handle_immigration_choice(message):
 
 
 def process_ai_chat(message, session_id):
-    if message.text.lower() == "🏠 بازگشت به منو اصلی":
+    if message.text.lower() == MenuButtons.HOME:
+        bot.clear_step_handler_by_chat_id(message.chat.id)
         bot.send_message(
             chat_id=message.chat.id,
             text="منو اصلی",
-            reply_markup=home_keyboard()
+            reply_markup=menu_keyboard()
         )
         return
     ai_response = process_ai_chat_handler(message, session_id)
