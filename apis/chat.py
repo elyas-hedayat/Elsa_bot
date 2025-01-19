@@ -9,9 +9,10 @@ def process_ai_chat_handler(message, session_id):
         'Authorization': f'Bearer {Config.METIS_API_KEY}',
         'Content-Type': 'application/json'
     }
+    print(message)
     data = {
         "message": {
-            "content": message.text,
+            "content": message,
             "type": "USER"
         }
     }
@@ -20,4 +21,5 @@ def process_ai_chat_handler(message, session_id):
         ai_response = response.json().get('content', 'No response from AI')
         return ai_response
     else:
+        print(response.content)
         return "Failed to get response from AI. Please try again."
