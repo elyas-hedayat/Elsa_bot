@@ -15,7 +15,7 @@ class Config:
     # API Keys
     METIS_API_KEY = os.getenv('METIS_API_KEY')
     BOT_ID = os.getenv('BOT_ID')
-
+    EXPERIENCE_CHAT_ID = os.getenv("EXPERIENCE_CHAT_ID")
     # Feature Limits
     MAX_DAILY_SEARCHES = int(os.getenv('MAX_DAILY_SEARCHES', '3'))
 
