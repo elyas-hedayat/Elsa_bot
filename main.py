@@ -1,4 +1,7 @@
+import random
+
 import telebot
+from gtts import gTTS
 
 from apis.chat import process_ai_chat_handler
 from apis.metis import create_metis_session
@@ -72,7 +75,9 @@ def handle_immigration_choice(message):
         session_id = create_metis_session(bot_id=Config.BOT_ID)
         bot.register_next_step_handler(message, process_ai_chat, session_id)
     elif message.text == ExtraButton.USER_EXPERIENCES.value:
+        session_id = create_metis_session(bot_id=Config.EXPERIENCE_CHAT_ID)
         response_text = MessageEnum.EXPERIENCE_RESPONSE_BOT
+        bot.register_next_step_handler(message, process_ai_experience_chat, session_id)
     bot.send_message(
         chat_id=message.chat.id,
         text=response_text,
@@ -93,6 +98,32 @@ def process_ai_chat(message, session_id):
     reply_markup = audio_keyboard()
     bot.send_message(message.chat.id, ai_response, reply_markup=reply_markup)
     bot.register_next_step_handler(message, process_ai_chat, session_id)
+
+
+def process_ai_experience_chat(message, session_id):
+    if message.text.lower() == MenuButtons.HOME:
+        bot.clear_step_handler_by_chat_id(message.chat.id)
+        bot.send_message(
+            chat_id=message.chat.id,
+            text="منو اصلی",
+            reply_markup=menu_keyboard()
+        )
+        return
+    ai_response = process_ai_chat_handler(message, session_id)
+    reply_markup = audio_keyboard()
+    bot.send_message(message.chat.id, ai_response, reply_markup=reply_markup)
+    bot.register_next_step_handler(message, process_ai_chat, session_id)
+
+
+@bot.callback_query_handler(func=lambda call: call.data == "Audio")
+def handle_audio_request(call):
+    name = f"f{random.randint(1, 10000000)}.mp3"
+    tts = gTTS(text=call.message.text, slow=False)
+    tts.save(name)
+
+    # Send the audio file back to the user
+    with open(name, 'rb') as audio:
+        bot.send_audio(chat_id=call.message.chat.id, audio=audio)
 
 
 bot.infinity_polling()
