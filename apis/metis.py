@@ -33,6 +33,6 @@ def create_metis_session(bot_id: str, content: str = '') -> str | None:
     try:
         response = requests.post(url, headers=headers, json=payload, verify=False)
         return response.json().get('id')
-    except requests.exceptions.RequestException as e:
+    except Exception as e:
         print(str(e))
         return None
