@@ -39,7 +39,7 @@ exclude = [
     "site-packages",
     "venv",
 ]
-line-length = 119
+line-length = 200
 
 [tool.ruff.lint]
 extend-select = ["E501"]
