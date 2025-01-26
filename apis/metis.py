@@ -22,12 +22,6 @@ def create_metis_session(bot_id: str, content: str = '') -> str | None:
     payload = {
         "botId": bot_id,
         "user": None,
-        "initialMessages": [
-            {
-                "type": "USER",
-                "content": content,
-            }
-        ]
     }
 
     try:
