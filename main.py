@@ -142,7 +142,7 @@ def handle_audio_request(call):
         with open(name, 'rb') as audio:
             bot.send_audio(chat_id=call.message.chat.id, audio=audio)
     except Exception:
-        error_message = "فعلا بلد نیستم فارسی صحبت کنم یادگیرفتم خبرت میکنم"
+        error_message = "در حال حاضر فقط متن های انگلیسی به ویس تبدیل میشه.."
         bot.send_message(chat_id=call.message.chat.id, text=error_message)
 
 
@@ -167,7 +167,6 @@ def process_job_chat(message, session_id):
         ai_response = response.json().get('content', 'No response from AI')
         return ai_response
     else:
-
         bot.send_message(message.chat.id, "Failed to get response from AI. Please try again.")
     bot.register_next_step_handler(message, process_ai_chat, session_id)
 
@@ -201,7 +200,7 @@ def process_job_search(message):
             google_search_term=
             f"{result.get('job')} jobs near {result.get('country')}, {result.get('city')} yesterday",
             location=f"{result.get('country')}",
-            results_wanted=10,
+            results_wanted=25,
             hours_old=100,
             # country_indeed='USA',
             # linkedin_fetch_description=True # gets more info such as description, direct job url (slower)
@@ -254,7 +253,8 @@ def send_job(user_id, index):
         )
         bot.send_message(user_id, search_summary, reply_markup=reply_markup)
     else:
-        bot.send_message(user_id, "دیگه تمو شد یه بار دیگه سرچ کن حالا", )
+        bot.send_message(user_id,
+        "سعی کردیم جدیدترین آگهی ها رو برات به نمایش بزاریم بزودی امکانی برای کاربرها فراهم میشه که باتوجه به موقعیت شغلی که میخوان اگهی ها براشون ارسال بشه پس تا ائن موقعه کنارمون باش.", )
 
 
 @bot.callback_query_handler(func=lambda call: call.data.startswith("next:"))
