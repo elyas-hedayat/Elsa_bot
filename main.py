@@ -195,13 +195,14 @@ def process_job_search(message):
         bot.send_message(message.chat.id, info_message)
         user_id = str(message.chat.id)
         jobs = scrape_jobs(
-            site_name=["linkedin", "google"],
+            site_name=["indeed", "google", "linkedin", "zip_recruiter", "glassdoor", ],
             search_term=result.get("job"),
             google_search_term=
             f"{result.get('job')} jobs near {result.get('country')}, {result.get('city')} yesterday",
             location=f"{result.get('country')}",
             results_wanted=25,
             hours_old=100,
+            country_indeed=result.get('country'),
             # country_indeed='USA',
             # linkedin_fetch_description=True # gets more info such as description, direct job url (slower)
             # proxies=["208.195.175.46:65095", "208.195.175.45:65095", "localhost"],
