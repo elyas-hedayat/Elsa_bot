@@ -18,7 +18,7 @@ idna==3.10
 markdownify==0.13.1
 multidict==6.1.0
 nodeenv==1.9.1
-numpy==2.2.2
+numpy==1.26.3
 pandas==2.2.3
 platformdirs==4.3.6
 pre_commit==4.0.1
