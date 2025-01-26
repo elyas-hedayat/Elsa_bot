@@ -253,6 +253,7 @@ def send_job(user_id, index):
             f"-------------------------\n\n"
         )
         bot.send_message(user_id, search_summary, reply_markup=reply_markup)
+        redis_client.lrem(user_id, 1, json.dumps(job_data))
     else:
         bot.send_message(user_id,
         "سعی کردیم جدیدترین آگهی ها رو برات به نمایش بزاریم بزودی امکانی برای کاربرها فراهم میشه که باتوجه به موقعیت شغلی که میخوان اگهی ها براشون ارسال بشه پس تا ائن موقعه کنارمون باش.", )
